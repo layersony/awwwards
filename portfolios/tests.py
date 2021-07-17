@@ -14,4 +14,17 @@ class TestProjects(TestCase):
   def test_isinstance(self):
     self.assertTrue(isinstance(self.newproject, Projects))
 
-# Create your tests here.
+  def test_saveProject(self):
+    self.assertEqual(len(Projects.objects.all()),1) 
+
+  def test_deleteProject(self):
+    self.new_project2 = Projects(title='4life', image='test.jpg', projectowner=User.objects.create(username='maingi'), description='a Webapp fro gbv victims', livelink='http://gbv.com/about')
+    self.new_project2.save_project()
+    self.assertEqual(len(Projects.objects.all()),2)
+    Projects.delete_project(self.new_project2.id)
+    self.assertEqual(len(Projects.objects.all()),1)
+
+  def test_updateProject(self):
+    Projects.update_description(self.newproject.id, 'this is amazing')
+    updated_post = Projects.objects.get(id=self.newproject.id)
+    self.assertEqual(updated_post.description,  'this is amazing')
