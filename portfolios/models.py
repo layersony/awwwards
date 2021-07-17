@@ -26,6 +26,17 @@ class Projects(models.Model):
   @classmethod
   def update_description(cls, id, description):
     cls.objects.filter(id=id).update(description=description)
+  
+  @classmethod
+  def user_projects(cls, username):
+    projects = cls.objects.filter(projectowner__username=username)
+    return projects
+
+  @classmethod
+  def all_projects(cls):
+    allprojects = cls.objects.all()
+    return allprojects
+
 # class profile
 class Profile(models.Model):
   profilePic = models.ImageField(upload_to='userProfile/', null=True, blank=True)
