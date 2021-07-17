@@ -39,3 +39,18 @@ class TestProjects(TestCase):
     self.new_project2.save_project()
     usrpic = Projects.user_projects(self.new_project2.projectowner.username)
     self.assertEqual(len(usrpic), 1)
+
+class TestRate(TestCase):
+  def setUp(self):
+    self.new_user = User(username = "layersony")
+    self.new_user.save()
+    self.newproject = Projects.objects.create(title='Delani Studion', image='test.jpg', projectowner= User.objects.get(username='layersony'), description='a clone for delani studio', livelink='http://google.com/?search=this+is+amazing')
+    self.newrating = Rate.objects.create(design=2, usability=5, content=6, review='its amazing', project=self.newproject, user=User.objects.get(username='layersony'))
+
+  def tearDown(self):
+    Profile.objects.all().delete()
+    User.objects.all().delete()
+    Rate.objects.all().delete()
+
+  def test_isinstance(self):
+    self.assertTrue(isinstance(self.newrating, Rate))
