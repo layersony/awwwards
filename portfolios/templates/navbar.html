@@ -12,4 +12,12 @@
   <a class="btn btn-outline-secondary mr-2" href="/accounts/login">Login</a>
   {% endif %}
 </div>
+<form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform" role="search" action='{% url "search" %}'>
+  <div class="searchform">
+    <div class="search">
+      <button type="submit" class="searchButton"><i class="fad fa-search"></i></button>
+      <input class="form-control me-2 searchTerm" name="search" type="search" placeholder="Search" aria-label="Search">
+    </div>
+  </div>
+</form>
 <hr>

@@ -52,4 +52,9 @@ def projectdetails(request):
   return render(request, 'profile/projectdetails.html')
 
 def search(request):
-  return render(request, 'search.html')
+  if 'search' in request.GET and request.GET['search']:
+    search_term = request.GET.get('search')
+    searchprofiles = Projects.searchProjects(search_term)
+    return render(request, 'search.html', {'searchresults':searchprofiles})
+  else:
+    return redirect('home')
