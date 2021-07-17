@@ -28,3 +28,8 @@ class TestProjects(TestCase):
     Projects.update_description(self.newproject.id, 'this is amazing')
     updated_post = Projects.objects.get(id=self.newproject.id)
     self.assertEqual(updated_post.description,  'this is amazing')
+
+  def test_allprojects(self):
+    self.new_project2 = Projects(title='4life', image='test.jpg', projectowner=User.objects.create(username='maingi'), description='a Webapp fro gbv victims', livelink='http://gbv.com/about')
+    self.new_project2.save_project()
+    self.assertEqual(len(Projects.all_projects()), 2)
