@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import include
 from . import views
 
 from django.conf.urls.static import static
@@ -10,7 +11,9 @@ urlpatterns = [
     path('userprofile', views.userprofile, name='userprofile'),
     path('account/postproject', views.postpoject, name='postproject'),
     path('projectdetails', views.projectdetails, name='projectdetails'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('tinymce/', include('tinymce.urls')),
+
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
