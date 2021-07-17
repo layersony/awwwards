@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class Projects(models.Model):
   title = models.CharField(max_length=200)
   image = models.ImageField(upload_to='project/', null=True, blank=True)
-  username = models.OneToOneField(User, on_delete=models.CASCADE)
+  projectowner = models.OneToOneField(User, on_delete=models.CASCADE)
   description = HTMLField(null=True, blank=True)
   livelink = models.URLField(null=True, blank=True)
 
@@ -38,3 +38,13 @@ class Profile(models.Model):
     return self.username.username
 
 # class reviews
+class Rate(models.Model):
+  design = models.IntegerField(null=True, blank=True, default=0)
+  usability = models.IntegerField(null=True, blank=True, default=0)
+  content = models.IntegerField(null=True, blank=True, default=0)
+  review = models.CharField(max_length=300, blank=True, null=True)
+  project = models.ForeignKey(Projects, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.review[:20]
