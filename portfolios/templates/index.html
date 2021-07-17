@@ -2,4 +2,14 @@
 
 {% block content %}
   <h1>Home Index</h1>
+  <div class="bg-secondary">
+    {% for project in allprojects %}
+      <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
+      <p>{{ project.title }}</p>
+      <p>{{ project.projectowner }}</p>
+      <p>{{ project.description }}</p>
+      <p>{{ project.livelink }}</p>
+
+    {% endfor %}
+  </div>
 {% endblock %}

@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from .models import Profile, Projects, Rate
 
 def index(request):
-  return render(request, 'index.html')
+  allprojects = Projects.objects.all()
+  return render(request, 'index.html', {'allprojects':allprojects})
 
 def profile(request):
   return render(request, 'profile/index.html')
