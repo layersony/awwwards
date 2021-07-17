@@ -33,3 +33,9 @@ class TestProjects(TestCase):
     self.new_project2 = Projects(title='4life', image='test.jpg', projectowner=User.objects.create(username='maingi'), description='a Webapp fro gbv victims', livelink='http://gbv.com/about')
     self.new_project2.save_project()
     self.assertEqual(len(Projects.all_projects()), 2)
+
+  def test_userprojects(self):
+    self.new_project2 = Projects(title='4life', image='test.jpg', projectowner=User.objects.create(username='maingi'), description='a Webapp fro gbv victims', livelink='http://gbv.com/about')
+    self.new_project2.save_project()
+    usrpic = Projects.user_projects(self.new_project2.projectowner.username)
+    self.assertEqual(len(usrpic), 1)
