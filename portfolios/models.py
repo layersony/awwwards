@@ -16,6 +16,16 @@ class Projects(models.Model):
   def __str__(self):
     return self.title
 
+  def save_project(self):
+    self.save()
+
+  @classmethod
+  def delete_project(cls, id):
+    cls.objects.filter(id=id).delete()
+
+  @classmethod
+  def update_description(cls, id, description):
+    cls.objects.filter(id=id).update(description=description)
 # class profile
 class Profile(models.Model):
   profilePic = models.ImageField(upload_to='userProfile/', null=True, blank=True)
