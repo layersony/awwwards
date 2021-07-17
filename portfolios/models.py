@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models import Q
 
 
 # class projects
@@ -37,6 +38,10 @@ class Projects(models.Model):
     allprojects = cls.objects.all()
     return allprojects
 
+  def searchProjects(cls, searchterm):
+    searchresults = cls.objects.filter(Q(title__icontains=searchterm | Q(description__icontains=searchterm)))
+    return searchresults
+
 # class profile
 class Profile(models.Model):
   profilePic = models.ImageField(upload_to='userProfile/', null=True, blank=True)
@@ -57,7 +62,7 @@ class Profile(models.Model):
 
   def __str__(self):
     return self.username.username
-
+ 
 # class reviews
 class Rate(models.Model):
   design = models.IntegerField(null=True, blank=True, default=0)
