@@ -39,7 +39,7 @@ class Projects(models.Model):
     return allprojects
 
   def searchProjects(cls, searchterm):
-    searchresults = cls.objects.filter(Q(title__icontains=searchterm | Q(description__icontains=searchterm)))
+    searchresults = cls.objects.filter(Q(title__icontains=searchterm) | Q(description__icontains=searchterm) | Q(projectowner__icontains=searchterm))
     return searchresults
 
 # class profile
@@ -74,3 +74,6 @@ class Rate(models.Model):
 
   def __str__(self):
     return self.review[:20]
+
+  def save_rate(self):
+    self.save()
