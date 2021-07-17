@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Projects, Rate
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, PostForm
 from django.contrib import messages
 
 def index(request):
@@ -30,11 +30,23 @@ def profile(request):
             }
   return render(request, 'profile/index.html', params)
 
+@login_required(login_url='/accounts/login/')
 def userprofile(request):
   return render(request, 'userprofile.html')
 
+@login_required(login_url='/accounts/login/')
 def postpoject(request):
-  return render(request, 'profile/postproject.html')
+  if request.method == 'POST':
+    postform = PostForm(request.POST, request.FILES, instance=request.user.profile)
+    if postform.is_valid:
+      pro = postform.save(commit=False)
+      pro.projectowner = request.user
+      pro.save()
+      return redirect('profile')
+
+  postform = PostForm()
+  params = {'postform':postform,}
+  return render(request, 'profile/postproject.html', params)
 
 def projectdetails(request):
   return render(request, 'profile/projectdetails.html')

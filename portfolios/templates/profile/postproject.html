@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
   <h1>Post Project</h1>
+  <div>
+    <form action="{% url 'postproject' %}" enctype="multipart/form-data" method="POST">
+      {% bootstrap_form postform %}
+      <input type="button" value="Submit Project" class="btn btn-success">
+    </form>
+  </div>
 {% endblock %}
