@@ -40,6 +40,21 @@ class TestProjects(TestCase):
     usrpic = Projects.user_projects(self.new_project2.projectowner.username)
     self.assertEqual(len(usrpic), 1)
 
+class TestProfile(TestCase):
+  def setUp(self):
+    self.new_user = User(username = "layersony")
+    self.new_user.save()
+    self.newprofile = Profile.objects.create(profilePic='test.jpg', bio='i am amazing')
+
+  def tearDown(self):
+    Profile.objects.all().delete()
+    User.objects.all().delete()
+
+  def test_isinstance(self):
+    self.assertTrue(isinstance(self.newprofile, Profile))
+
+
+  
 class TestRate(TestCase):
   def setUp(self):
     self.new_user = User(username = "layersony")
