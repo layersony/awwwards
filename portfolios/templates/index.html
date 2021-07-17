@@ -7,7 +7,10 @@
       <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
       <p>{{ project.title }}</p>
       <p>{{ project.projectowner }}</p>
-      <p>{{ project.description }}</p>
+      {% autoescape on %}
+      <p>{{ project.description|safe }}</p>
+      {% endautoescape %}
+      
       <p>{{ project.livelink }}</p>
 
     {% endfor %}

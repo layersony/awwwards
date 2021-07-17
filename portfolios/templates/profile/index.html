@@ -1,5 +1,41 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
   <h1>Profile</h1>
+
+  <hr>
+  <h5>{{ curr_user.username }}</h5>
+  <p>{{ curr_user.bio }}</p>
+  <p>{{ curr_user.phone }}</p>
+  <button>Update Info </button>
+<hr>
+  <div class="update">
+    <h1>update info</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
+      {% csrf_token %}
+      {% bootstrap_form userform %}
+      <br>
+      {% bootstrap_form profileform %}
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+
+  <hr>
+  <div class="userprojects mb-5">
+    {% for project in curr_projects %}
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
+    <p>{{ project.title }}</p>
+    <p>{{ project.projectowner }}</p>
+    {% autoescape on %}
+    <p>{{ project.description|safe }}</p>
+    {% endautoescape %}   
+
+    <p>{{ project.livelink }}</p>
+    {% empty %}
+      <p class="alert alert-info text-center">Currently No Projects</p>
+    {% endfor %}
+  </div>
 {% endblock %}
