@@ -2,8 +2,10 @@
 
 {% block content %}
   <h1>Home Index</h1>
-  <div class="bg-secondary">
+  <div >
     {% for project in allprojects %}
+    <div class='mb-3 bg-warning'>
+      <a href="{% url 'userprofile' project.projectowner.profile.id %}">Profile</a><br>
       <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
       <p>{{ project.title }}</p>
       <p>{{ project.projectowner }}</p>
@@ -12,6 +14,9 @@
       {% endautoescape %}
       
       <p>{{ project.livelink }}</p>
+      <a href="{% url 'projectdetails'  project.id %}">Check it out</a>
+    </div>
+
 
     {% endfor %}
   </div>
