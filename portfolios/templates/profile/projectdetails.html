@@ -1,5 +1,61 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
   <h1>Project Detials</h1>
+  <div class="bg-secondary">
+      <img src="{{ specproject.image.url }}" alt="{{ specproject.title }}" style='width:50vw'>
+      <p>{{ specproject.title }}</p>
+      <p>{{ specproject.projectowner }}</p>
+      {% autoescape on %}
+      <p>{{ specproject.description|safe }}</p>
+      {% endautoescape %}
+      
+      <p>{{ project.livelink }}</p>
+
+      <hr>
+      <div class="review_overrall bg-success">
+
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center bg-info mb-5">
+        <div class="col-md-6 bg-warning">
+          <p>1 <- <span class="text-danger">Low</span> 5 -- <span class='text-white'>Mid</span>  10 -> <span class='text-success'>High</span></p>
+          <form method="post" id="rateforms" class="d-flex flex-column justify-content-between align-items-center" >
+            {% csrf_token %}
+            <!-- rateform -->
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex flex-column justify-content-between align-items-center mr-3" >
+                <label for="{{ rateform.design.id_for_label }}">Design</label>
+                {{ rateform.design }}
+              </div>
+              <div class="d-flex flex-column justify-content-between align-items-center mr-3">
+                <label for="{{ rateform.usability.id_for_label }}">Usability</label>
+                {{ rateform.usability }}  
+              </div>
+              <div class="d-flex flex-column justify-content-between align-items-center mr-3">
+                <label for="{{ rateform.content.id_for_label }}">Content</label>
+                {{ rateform.content }}
+              </div>
+            </div>
+            <br>
+            {{ rateform.review }}
+            <br>
+            <input type="hidden" value="{{ specproject.id }}" name="project_id">
+            <button class="btn btn-outline-success btn-sm" type="submit">Submit Review</button>
+          </form>
+        </div>
+
+        <div class="col-md-6 bg-danger">
+          {% for allrate in allratesproject %}
+          <span>{{ allrate.user.profile }}</span>--
+          <span>{{ allrate.design_average }} %</span>--
+          <span>{{ allrate.usability_average }} %</span>--
+          <span>{{ allrate.content_average }} %</span>--
+          <span>{{ allrate.overall }} %</span>
+          <br>
+          {% endfor %}
+        </div>
+      </div>
+  </div>
 {% endblock %}
