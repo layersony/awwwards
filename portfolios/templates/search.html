@@ -2,4 +2,16 @@
 
 {% block content %}
   <h1>Search</h1>
+  {% for project in searchresults %}
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
+    <p>{{ project.title }}</p>
+    <p>{{ project.projectowner }}</p>
+    {% autoescape on %}
+    <p>{{ project.description|safe }}</p>
+    {% endautoescape %}
+    <p>{{ project.livelink }}</p>
+
+  {% empty %}
+  <p class="alert alert-info text-center">No Search Results for {{ search_term }}</p>
+  {% endfor %}
 {% endblock %}
