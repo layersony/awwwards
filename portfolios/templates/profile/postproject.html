@@ -5,8 +5,9 @@
   <h1>Post Project</h1>
   <div>
     <form action="{% url 'postproject' %}" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
       {% bootstrap_form postform %}
-      <input type="button" value="Submit Project" class="btn btn-success">
+      <input type="submit" value="Submit Project" class="btn btn-success">
     </form>
   </div>
 {% endblock %}
