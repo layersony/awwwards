@@ -2,4 +2,25 @@
 
 {% block content %}
   <h1>User Profile</h1>
+  <hr>
+  <h5>{{ userdetail.username }}</h5>
+  <p>{{ userdetail.bio }}</p>
+  <p>{{ userdetail.phone }}</p>
+<hr>
+
+  <hr>
+  <div class="userprojects mb-5">
+    {% for project in curr_projects %}
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
+    <p>{{ project.title }}</p>
+    <p>{{ project.projectowner }}</p>
+    {% autoescape on %}
+    <p>{{ project.description|safe }}</p>
+    {% endautoescape %}   
+
+    <p>{{ project.livelink }}</p>
+    {% empty %}
+      <p class="alert alert-info text-center">Currently No Projects</p>
+    {% endfor %}
+  </div>
 {% endblock %}
