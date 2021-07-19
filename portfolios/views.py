@@ -106,7 +106,7 @@ def ratereview(request):
   Rate.objects.filter(id=thisRate.id).update(design_average=round(design_average,2), usability_average=round(usability_average, 2), content_average=round(content_average, 2), overall=round(overall, 2))
 
   data = {
-    'success': 'Review Added Successfully',
+    'success': 'Review Added Successfully Refresh page for your Review to Appear',
     'design_average': round(design_average, 2),
     'usability_average': round(usability_average, 2),
     'content_average': round(content_average,2),
