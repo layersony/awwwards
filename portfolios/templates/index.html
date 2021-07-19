@@ -30,10 +30,10 @@
   </div>
   <div class="separator mt-md-5 mb-md-5">Projects</div>
 </div>
-<div class="container-fluid">
+<div class="container">
   <div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
     {% for project in allprojects %}
-    <div class='mr-3 contimage'>
+    <div class='mr-3 mt-5 contimage'>
       <a class='proj' href="{% url 'projectdetails'  project.id %}"><img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid userpics"></a>
       <div class="text-left p-2">
         <p><strong>{{ project.title }}</strong></p>
