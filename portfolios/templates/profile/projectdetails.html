@@ -2,25 +2,24 @@
 {% load bootstrap4 %}
 
 {% block content %}
-  <h1>Project Detials</h1>
-  <div class="bg-secondary">
-      <img src="{{ specproject.image.url }}" alt="{{ specproject.title }}" style='width:50vw'>
-      <p>{{ specproject.title }}</p>
-      <p>{{ specproject.projectowner }}</p>
-      {% autoescape on %}
-      <p>{{ specproject.description|safe }}</p>
-      {% endautoescape %}
-      
-      <p>{{ project.livelink }}</p>
-
-      <hr>
-      <div class="review_overrall bg-success">
-
+<div class="container-fluid text-center imagebackground">
+  <img src="{{ specproject.image.url }}" alt="{{ specproject.title }}" class="img-fluid">
+</div>
+<hr>
+<div class="container mb-5 mt-2">
+      <div class="review_overrall p-2">
+        <div class="d-flex justify-content-between align-item-center">
+          <h4>{{ specproject.title }}</h4>
+          <p>Owner: {{ specproject.projectowner }}</p>
+        </div>
+        {% autoescape on %}
+        <p>Desc: {{ specproject.description|safe }}</p>
+        {% endautoescape %}
+        <p>{{ project.livelink }}</p>
       </div>
-
-      <div class="d-flex justify-content-between align-items-center bg-info mb-5">
-        <div class="col-md-6 bg-warning">
-          <p>1 <- <span class="text-danger">Low</span> 5 -- <span class='text-white'>Mid</span>  10 -> <span class='text-success'>High</span></p>
+      <div class="row">
+        <div class="col-md-5 mb-3">
+          <p class="text-center">1 <- <span class="text-danger">Low</span> 5 -- <span class='text-warning'>Mid</span>  10 -> <span class='text-success'>High</span></p>
           <form method="post" id="rateforms" class="d-flex flex-column justify-content-between align-items-center" >
             {% csrf_token %}
             <!-- rateform -->
@@ -46,16 +45,24 @@
           </form>
         </div>
 
-        <div class="col-md-6 bg-danger">
+        <div class="col-md-7">
           {% for allrate in allratesproject %}
-          <span>{{ allrate.user.profile }}</span>--
-          <span>{{ allrate.design_average }} %</span>--
-          <span>{{ allrate.usability_average }} %</span>--
-          <span>{{ allrate.content_average }} %</span>--
-          <span>{{ allrate.overall }} %</span>
-          <br>
+          <div class="row bg-primary mt-1">
+            <div class="col-md-4 d-flex justify-content-between align-items-center">
+              <span>{{ allrate.user.profile }}</span>
+              <span>{{ allrate.user.profile }}</span>
+            </div>
+            <div class="col-md-8">
+              <span>{{ allrate.design_average }} %</span>--
+              <span>{{ allrate.usability_average }} %</span>--
+              <span>{{ allrate.content_average }} %</span>--
+              <span>{{ allrate.overall }} %</span>
+            </div>
+          </div>
+          {% empty %}
+          <p class="alert alert-warning">No Reviews At the Moment</p>
           {% endfor %}
         </div>
       </div>
-  </div>
+</div>
 {% endblock %}

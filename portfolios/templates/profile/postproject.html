@@ -2,12 +2,22 @@
 {% load bootstrap4 %}
 
 {% block content %}
-  <h1>Post Project</h1>
-  <div>
-    <form action="{% url 'postproject' %}" enctype="multipart/form-data" method="POST">
-      {% csrf_token %}
-      {% bootstrap_form postform %}
-      <input type="submit" value="Submit Project" class="btn btn-success">
-    </form>
+<div class="container">
+  <div class="d-flex justify-content-center align-items center mt-3">
+    <div class="postpro p-4">
+      <h1>Post Project</h1>
+      <div>
+        <form action="{% url 'postproject' %}" enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {% bootstrap_form postform %}
+          <div class="text-center">
+            <input type="submit" value="Submit Project" class="btn btn-outline-secondary">
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
   </div>
+
+
 {% endblock %}

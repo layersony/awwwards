@@ -1,23 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Home Index</h1>
-  <div >
-    {% for project in allprojects %}
-    <div class='mb-3 bg-warning'>
-      <a href="{% url 'userprofile' project.projectowner.profile.id %}">Profile</a><br>
-      <img src="{{ project.image.url }}" alt="{{ project.title }}" style='width:50vw'>
-      <p>{{ project.title }}</p>
-      <p>{{ project.projectowner }}</p>
-      {% autoescape on %}
-      <p>{{ project.description|safe }}</p>
-      {% endautoescape %}
-      
-      <p>{{ project.livelink }}</p>
-      <a href="{% url 'projectdetails'  project.id %}">Check it out</a>
+<div class='landing d-flex justify-content-center align-items-center'>
+  <div class="container  text-center">
+    <H1 class="headwording"><span class='headword'>A</span>WWWARDS <span class='headword'>2021</span></H1>
+    <p>POST YOUR PROJECTS & RECEIVE REVIEWS AND RATINGS</p>
+  </div>
+</div>
+<!-- <div class="landextra"></div> -->
+<div class="container mt-md-5">
+  <div class="text-center mb-md-3">
+    <div class='d-flex justify-content-between align-items-center'>
+      <h5>Sites of the Day</h5>
+      <p>{{ today_date }}</p>
     </div>
-
-
+    <div class="row">
+      {% for pic in siteday %}
+      <div class="sitecont col-md-4">
+        <img src="{{ pic.image.url }}" alt="{{ pic.title }}" class="img-fluid siteday image">
+        <div class="middle ml-3 d-flex justify-content-center align-items-center">
+          <a href="facebook.com" data-toggle="tooltip" data-placement="right" title="Facebook"><i class="fab fa-facebook text"></i></a>
+          <a href="twitter.com" data-toggle="tooltip" data-placement="right" title="twitter"><i class="fab fa-twitter text"></i></a>
+          <a href="{{ pic.livelink }}" data-toggle="tooltip" data-placement="right" title="View Site"><i class="fab fa-github-alt text"></i></a>
+          <a href="{% url 'projectdetails'  pic.id %}" data-toggle="tooltip" data-placement="right" title="More Details"><i class="fad fa-info-circle text"></i></i></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="separator mt-md-5 mb-md-5">Projects</div>
+</div>
+<div class="container-fluid">
+  <div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
+    {% for project in allprojects %}
+    <div class='mr-3 contimage'>
+      <a class='proj' href="{% url 'projectdetails'  project.id %}"><img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid userpics"></a>
+      <div class="text-left p-2">
+        <p><strong>{{ project.title }}</strong></p>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>By <a href="{% url 'userprofile' project.projectowner.profile.id %}">{{ project.projectowner.profile }}</a></span>
+          <span><sub> From Kenya</sub></span>
+        </div>
+      </div>
+    </div>
     {% endfor %}
   </div>
+</div>
 {% endblock %}
