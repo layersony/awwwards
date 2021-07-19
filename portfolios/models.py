@@ -60,7 +60,7 @@ class Projects(models.Model):
 
 # class profile
 class Profile(models.Model):
-  profilePic = models.ImageField(upload_to='userProfile/', null=True, blank=True, default='userProfile/test.png')
+  profilePic = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
   username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
   bio = HTMLField(blank=True, null=True)
   phone = models.IntegerField(blank=True, null=True)
