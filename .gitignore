@@ -3,6 +3,7 @@ envawwwards/
 *.jpg
 *.jpeg
 *.png
+*.pyc
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/django

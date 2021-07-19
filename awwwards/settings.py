@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'portfolios',
     'bootstrap4',
     'tinymce',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
