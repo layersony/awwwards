@@ -1,9 +1,14 @@
-from django.urls import path, re_path
-from django.conf.urls import include
+from django.urls import path, include
 from . import views
 
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('users', views.UserViewSet)
+router.register('projects', views.ProjectViewSet)
+router.register('profile', views.ProfileViewSet)
 
 urlpatterns = [
     path('', views.index, name='home'),
@@ -13,7 +18,8 @@ urlpatterns = [
     path('projectdetails/<int:id>/', views.projectdetails, name='projectdetails'),
     path('search/', views.search, name='search'),
     path('tinymce/', include('tinymce.urls')),
-    path('ajax/ratereview/', views.ratereview, name='ratereview')
+    path('ajax/ratereview/', views.ratereview, name='ratereview'),
+    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:

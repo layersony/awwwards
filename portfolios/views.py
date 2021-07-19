@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from rest_framework import serializers
 from .models import Profile, Projects, Rate
 from .forms import UserForm, ProfileForm, PostForm, RateForm
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.models import User
+
+from rest_framework.response import Response
+from rest_framework import viewsets
+from .serializer import ProfileSerializer, ProjectSerializer, UserSerializer
 
 def index(request):
   allprojects = Projects.objects.all()
@@ -97,3 +103,15 @@ def ratereview(request):
     'overall': round(overall,2)
     }
   return JsonResponse(data)
+
+class ProfileViewSet(viewsets.ModelViewSet):
+  queryset = Profile.objects.all()
+  serializer_class = ProfileSerializer
+
+class ProjectViewSet(viewsets.ModelViewSet):
+  queryset = Projects.objects.all()
+  serializer_class = ProjectSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+  queryset = User.objects.all()
+  serializer_class = UserSerializer
