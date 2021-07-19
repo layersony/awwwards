@@ -1,8 +1,5 @@
 envawwards
 .env
-*.jpg
-*.jpeg
-*.png
 *.pyc
 
 
