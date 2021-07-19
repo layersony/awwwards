@@ -3,6 +3,9 @@ import django_heroku
 import dj_database_url
 from decouple import config, Csv
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,6 +26,7 @@ INSTALLED_APPS = [
     'tinymce',
     'rest_framework',
     'rest_framework.authtoken',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +141,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+cloudinary.config( 
+  cloud_name = "dpxieliji", 
+  api_key = "552746918141131", 
+  api_secret = "yvQ9yz4zaxxI4bXmz7Q_-S0r524" 
+)

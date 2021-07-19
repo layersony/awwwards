@@ -4,6 +4,8 @@ from tinymce.models import HTMLField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Q
+from cloudinary.models import CloudinaryField
+
 
 rating = (
     (1, '1'),
@@ -21,7 +23,8 @@ rating = (
 # class projects
 class Projects(models.Model):
   title = models.CharField(max_length=200)
-  image = models.ImageField(upload_to='project/', null=True, blank=True)
+  # image = models.ImageField(upload_to='project/', null=True, blank=True)
+  image = CloudinaryField('project/', null=True, blank=True)
   projectowner = models.ForeignKey(User, on_delete=models.CASCADE)
   description = HTMLField(null=True, blank=True)
   livelink = models.URLField(null=True, blank=True)
@@ -60,7 +63,8 @@ class Projects(models.Model):
 
 # class profile
 class Profile(models.Model):
-  profilePic = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
+  # profilePic = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
+  profilePic = CloudinaryField('userProfile/', default='userProfile/test.png')
   username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
   bio = HTMLField(blank=True, null=True)
   phone = models.IntegerField(blank=True, null=True)
