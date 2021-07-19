@@ -4,16 +4,20 @@ from rest_framework import serializers
 from .models import Profile, Projects, Rate
 from .forms import UserForm, ProfileForm, PostForm, RateForm
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
+from .permissions import IsAdminOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializer import ProfileSerializer, ProjectSerializer, UserSerializer
+from datetime import date
 
 def index(request):
   allprojects = Projects.objects.all()
-  return render(request, 'index.html', {'allprojects':allprojects})
+  siteday =  Projects.objects.all()
+  today_date = date.today()
+  return render(request, 'index.html', {'allprojects':allprojects, 'siteday':siteday[:3], 'today_date':today_date})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -39,10 +43,16 @@ def profile(request):
 
 @login_required(login_url='/accounts/login/')
 def userprofile(request, id):
-  userdetail = Profile.objects.get(id=id)
-  curr_projects = Projects.user_projects(userdetail.username)
-  return render(request, 'userprofile.html', {'userdetail':userdetail, 'curr_projects':curr_projects})
-
+  try:
+    userdetail = Profile.objects.get(id=id)
+    curr_projects = Projects.user_projects(userdetail.username)
+    if request.user.username == str(userdetail.username):
+      return redirect('profile')
+    else:
+      return render(request, 'userprofile.html', {'userdetail':userdetail, 'curr_projects':curr_projects})
+  except Profile.DoesNotExist:
+    return HttpResponseRedirect(', Sorry the Page You Looking For Doesnt Exist.')
+    
 @login_required(login_url='/accounts/login/')
 def postpoject(request):
   if request.method == 'POST':
@@ -105,13 +115,16 @@ def ratereview(request):
   return JsonResponse(data)
 
 class ProfileViewSet(viewsets.ModelViewSet):
+  permission_classes = (IsAdminOrReadOnly,)
   queryset = Profile.objects.all()
   serializer_class = ProfileSerializer
 
 class ProjectViewSet(viewsets.ModelViewSet):
+  permission_classes = (IsAdminOrReadOnly,)
   queryset = Projects.objects.all()
   serializer_class = ProjectSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
+  permission_classes = (IsAdminOrReadOnly,)
   queryset = User.objects.all()
   serializer_class = UserSerializer
