@@ -8,7 +8,7 @@ $(document).ready(function(){
       'data': form.serialize(), // turns from data to json
       'dataType':'json', // the data type
       'success': function(data){
-        alert(data['design_average'])
+        alert(data['success'])
         $('#id_design').val('');
         $('#id_usability').val('');
         $('#id_content').val('');
@@ -16,4 +16,6 @@ $(document).ready(function(){
       }
     })
   })
+
+  $('[data-toggle="tooltip"]').tooltip(); 
 })
