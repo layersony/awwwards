@@ -14,6 +14,7 @@
 .aWording{
   font-size:45px;
   font-family: 'Zen Tokyo Zoo', cursive;
+  color: goldenrod;
 }
 
 .navbar{
@@ -192,6 +193,83 @@
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0),rgb(218, 165, 32));
   color: black;
   border-radius: 5px;
+}
+
+.userpic{
+  max-width: 200px;
+}
+
+/** table **/
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.checklink{
+  color: black;
+  font-size: 20px;
+}
+
+.imgreview{
+  width: 50px;
+}
+
+/**** footer ***/
+footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #ffffff;
+  height: auto;
+  background: black;
+}
+footer h4{
+  color: #ffffff;
+}
+footer>.social{
+  background-color: transparent;
+}
+footer>.social ol{
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+footer>.social ol li {
+  padding: 5px;
+  font-size: 15px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+footer>.social ol li >.fab {
+  padding: 5px;
+  font-size: 25px;
+  text-decoration: none;
+  color: #ffffff;
+}
+footer>.social ol li>.fab:hover{
+  font-size: 35px;
+  color: #ffffff;
+  transition: ease-in 0.1s;
+}
+
+footer>.footer_info p{
+  font-size: 15px;
 }
 
 @media screen and (max-width:500px){

@@ -8,16 +8,12 @@
   <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
     <div class="row userdetails ">
       <div class="col-md-6">
-        <img src="" alt="{{ curr_user.username }}">
+        <img src="{{ curr_user.profilePic.url }}" alt="{{ curr_user.username }}" class="img-fluid userpic">
       </div>
       <div class='col-md-6 details'>
         <h4>{{ curr_user.username }}</h4>
-        {% if curr_user.bio %}
-        <p>{{ curr_user.bio }}</p>
-        {% endif %}
-        {% if curr_user.phone %}
-        <p>{{ curr_user.phone }}</p>
-        {% endif %}
+        <p>Bio: {{ curr_user.bio }}</p>
+        <p>Phone: {{ curr_user.phone }}</p>
         <button class="btn btn-outline-secondary btn-md plusicon" data-toggle="modal" data-target="#myModal"><i class="fad fa-plus"></i> <span>Update Info</span></button> 
       </div>
     </div>

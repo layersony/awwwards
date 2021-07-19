@@ -7,62 +7,76 @@
 </div>
 <hr>
 <div class="container mb-5 mt-2">
-      <div class="review_overrall p-2">
-        <div class="d-flex justify-content-between align-item-center">
-          <h4>{{ specproject.title }}</h4>
-          <p>Owner: {{ specproject.projectowner }}</p>
-        </div>
-        {% autoescape on %}
-        <p>Desc: {{ specproject.description|safe }}</p>
-        {% endautoescape %}
-        <p>{{ project.livelink }}</p>
-      </div>
-      <div class="row">
-        <div class="col-md-5 mb-3">
-          <p class="text-center">1 <- <span class="text-danger">Low</span> 5 -- <span class='text-warning'>Mid</span>  10 -> <span class='text-success'>High</span></p>
-          <form method="post" id="rateforms" class="d-flex flex-column justify-content-between align-items-center" >
-            {% csrf_token %}
-            <!-- rateform -->
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex flex-column justify-content-between align-items-center mr-3" >
-                <label for="{{ rateform.design.id_for_label }}">Design</label>
-                {{ rateform.design }}
-              </div>
-              <div class="d-flex flex-column justify-content-between align-items-center mr-3">
-                <label for="{{ rateform.usability.id_for_label }}">Usability</label>
-                {{ rateform.usability }}  
-              </div>
-              <div class="d-flex flex-column justify-content-between align-items-center mr-3">
-                <label for="{{ rateform.content.id_for_label }}">Content</label>
-                {{ rateform.content }}
-              </div>
-            </div>
-            <br>
-            {{ rateform.review }}
-            <br>
-            <input type="hidden" value="{{ specproject.id }}" name="project_id">
-            <button class="btn btn-outline-success btn-sm" type="submit">Submit Review</button>
-          </form>
-        </div>
-
-        <div class="col-md-7">
-          {% for allrate in allratesproject %}
-          <div class="row bg-primary mt-1">
-            <div class="col-md-4 d-flex justify-content-between align-items-center">
-              <span>{{ allrate.user.profile }}</span>
-              <span>{{ allrate.user.profile }}</span>
-            </div>
-            <div class="col-md-8">
-              <span>{{ allrate.design_average }} %</span>--
-              <span>{{ allrate.usability_average }} %</span>--
-              <span>{{ allrate.content_average }} %</span>--
-              <span>{{ allrate.overall }} %</span>
-            </div>
+  <div class="review_overrall p-2">
+    <div class="d-flex justify-content-between align-item-center">
+      <h3>{{ specproject.title }}</h3>
+      <p>Owner: {{ specproject.projectowner }}</p>
+    </div>
+    {% autoescape on %}
+    <p>Desc: {{ specproject.description|safe }}</p>
+    {% endautoescape %}
+    <a class="checklink" href="{{ specproject.livelink }}">Check Out the Site <i class="fad fa-external-link"></i></a>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-5 mb-3">
+      <h5 class="text-center"> <u>Leave a Review</u> </h5>
+      <p class="text-center">1 <- <span class="text-danger">Low</span> 5 -- <span class='text-warning'>Mid</span> 10 ->
+          <span class='text-success'>High</span></p>
+      <form method="post" id="rateforms" class="d-flex flex-column justify-content-between align-items-center">
+        {% csrf_token %}
+        <!-- rateform -->
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-column justify-content-between align-items-center mr-3">
+            <label for="{{ rateform.design.id_for_label }}">Design</label>
+            {{ rateform.design }}
           </div>
-          {% empty %}
-          <p class="alert alert-warning">No Reviews At the Moment</p>
-          {% endfor %}
+          <div class="d-flex flex-column justify-content-between align-items-center mr-3">
+            <label for="{{ rateform.usability.id_for_label }}">Usability</label>
+            {{ rateform.usability }}
+          </div>
+          <div class="d-flex flex-column justify-content-between align-items-center mr-3">
+            <label for="{{ rateform.content.id_for_label }}">Content</label>
+            {{ rateform.content }}
+          </div>
+        </div>
+        <br>
+        {{ rateform.review }}
+        <br>
+        <input type="hidden" value="{{ specproject.id }}" name="project_id">
+        <button class="btn btn-outline-success btn-sm" type="submit">Submit Review</button>
+      </form>
+    </div>
+
+    <div class="col-md-7">
+      {% for allrate in allratesproject %}
+      <div class="row mt-1">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <img src=" {{allrate.user.profile.profilePic.url }}" alt="review" class="img-fluid imgreview mr-1"> 
+          <span> {{ allrate.user.profile }}</span>
+        </div>
+        <div class="col-md-8">
+          <div style="overflow-x:auto;">
+            <table>
+              <tr>
+                <th>Overall %</th>
+                <th>Desgin</th>
+                <th>Usability</th>
+                <th>Content</th>
+              </tr>
+              <tr>
+                <td>{{ allrate.design_average }}</td>
+                <td>{{ allrate.usability_average }}</td>
+                <td>{{ allrate.content_average }}</td>
+                <td>{{ allrate.overall }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
+      {% empty %}
+      <p class="alert alert-warning">No Reviews At the Moment</p>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}

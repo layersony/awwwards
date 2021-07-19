@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="icon" href="https://assets.awwwards.com/assets/images/favicon.svg" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Awwards</title>
     {% bootstrap_css %}
@@ -20,6 +21,9 @@
     {% block content %} 
     
     {%endblock%}
+
+   {% include 'footer.html' %}
+
 
   {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
