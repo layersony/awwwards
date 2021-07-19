@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
+*{
+  scroll-behavior: smooth;
+  font-family: Ubuntu;
+}
+.navbar-brand{
+  font-size: 25px;
+  color: white;
+}
+.navbar-brand:hover{
+  font-size: 25px;
+  color: white;
+}
+.aWording{
+  font-size:45px;
+  font-family: 'Zen Tokyo Zoo', cursive;
+}
+
+.navbar{
+  background: black;
+  min-height: 100px;
+}
+.navbar-nav a{
+  color: white;
+  font-size: 19px;
+}
+.navbar-nav a:hover{
+  color: goldenrod;
+  border-bottom: 2px solid goldenrod;
+  transition:ease-in-out 0.5s;
+}
+
+
+.hambars{
+  font-size: 20px;
+  color: white;
+}
+.searchButton{
+  color: white;
+  font-size: 20px;
+}
+.searchButton:hover{
+  color: white;
+}
+
+/** landing page***/
+.landing{
+  background: linear-gradient(transparent, rgba(255, 217, 0, 0.446) 95%), url('../image/bg.jpeg');
+  height: 80vh;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+}
+
+.siteday{
+  width: 350px;
+}
+
+.headwording{
+  font-size: 90px;
+}
+.headword{
+  font-size: 120px;
+  font-family: 'Zen Tokyo Zoo', cursive;
+}
+.subheadword{
+    font-family: 'Zen Tokyo Zoo', cursive;
+}
+
+/*** image hover ***/
+.sitecont{
+  position: relative;
+}
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  max-height: 200px;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 70%;
+  left: 10%;
+  transform: translate(-10%, -10%);
+  /* -ms-transform: translate(-50%, -50%);  */
+} 
+
+.sitecont:hover .image {
+  opacity: 0.3;
+}
+
+.sitecont:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 28px;
+  padding: 7px;
+  max-width: 350px;
+  max-height: 180px;
+}
+
+/* .wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.wrapper::-webkit-scrollbar{
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+  border-radius: 10px;
+
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+} */
+
+/*****hr******/
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 30px;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #000;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .90em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .90em;
+}
+/*****endhr******/
+
+
+
+/***all projects***/
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem ,23rem));
+  justify-content: center;
+}
+.userpics{
+  height: 220px;
+  object-fit: fit;
+}
+
+.contimage{
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0.8px black;
+}
+.contimage a{
+  color: black;
+}
+.contimage a:hover{
+  color: goldenrod;
+}
+.postpro{
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0),rgb(218, 165, 32));
+  color: black;
+}
+/** userdetial **/
+.userdetails{
+  width: 600px;
+}
+.details{
+  border-left: 1px solid;
+}
+.plusicon i:hover{
+  transform: rotate(70deg);
+}
+
+/***loginform***/
+.loginform{
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0),rgb(218, 165, 32));
+  color: black;
+  border-radius: 5px;
+}
+
+@media screen and (max-width:500px){
+  .aWording{
+    font-size:35px;
+    font-family: 'Zen Tokyo Zoo', cursive;
+  }
+  .collapse{
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    transition: none;
+  }
+
+  .searchButton{
+    display: hidden;
+  }
+  .image {
+    max-height: none;
+  }
+  .headwording{
+    font-size: 25px;
+  }
+  .headword{
+    font-size: 40px;
+    font-family: 'Zen Tokyo Zoo', cursive;
+  }
+}
