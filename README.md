@@ -22,7 +22,7 @@ User Can :-
 ## Access the website
 Need the latest browser to be able to View
 
-Follow this link 
+Follow this link https://awwwards254.herokuapp.com/
 
 It is hosted by heroku
 
@@ -66,7 +66,7 @@ cd awwwards  && python3 -m venv envawwards && source envawwards/bin/activate
 ```
 
  ```bash 
-python manage.py makemigrations awwwards 
+python manage.py makemigrations portfolios 
  ``` 
  Now Migrate  
  ```bash 
@@ -91,7 +91,9 @@ http://localhost:8000/api/profile/
 ```
 ##### Live Link
 ```bash
-
+https://awwwards254.herokuapp.com/api/users/
+https://awwwards254.herokuapp.com/api/projects/
+https://awwwards254.herokuapp.com/api/profile/
 ```
   
 ### Access Django Admin
